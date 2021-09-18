@@ -40,6 +40,17 @@ import ChatHeader from '../../components/ChatHeader.vue'
 import ChatItem from '../../components/ChatItem.vue'
 export default Vue.extend({
   components: { ChatHeader, ChatItem },
+  data() {
+    return {
+      friendId: '',
+    }
+  },
+  mounted() {
+    // friendIdを取得
+    this.friendId = parseInt(
+      this.$router.currentRoute.path.split('/').slice(2)[0]
+    )
+  },
 })
 </script>
 

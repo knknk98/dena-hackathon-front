@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- テキストも表示するタイプ(普通にトークしてる状態) -->
-    <div v-if="isTalking" class="talking ma-4">
+    <div v-if="isTalking" class="talking ma-4" @click="openChatPage">
       <div class="talking-inner">
         <v-avatar size="36"><img src="../assets/icon_sample.png" /> </v-avatar>
         <div class="ml-4">
@@ -14,7 +14,7 @@
       </div>
     </div>
     <!-- バッジがつくタイプ(リクエスト中 or リクエストが来ている状態) -->
-    <div v-else>
+    <div v-else @click="openChatPage">
       <div class="friend ma-4">
         <div class="friend-inner">
           <v-avatar size="36"
@@ -35,11 +35,17 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'talk-item',
+  name: 'TalkItem',
   data() {
     return {
-      isTalking: true,
+      isTalking: false,
     }
+  },
+  methods: {
+    openChatPage() {
+      const friendId = 1
+      this.$router.push({ path: '/chat/' + friendId })
+    },
   },
 })
 </script>
