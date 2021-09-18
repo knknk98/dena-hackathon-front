@@ -2,7 +2,7 @@
   <v-app-bar dense class="header">
     <v-toolbar-title>App</v-toolbar-title>
     <v-spacer></v-spacer>
-    <div>
+    <div @click="toSettingPage">
       <v-avatar size="24"
         ><img
           src="https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg"
@@ -15,6 +15,11 @@
 import Vue from 'vue'
 export default Vue.extend({
   name: 'AppHeader',
+  methods: {
+    toSettingPage() {
+      this.$router.push('setting')
+    },
+  },
 })
 </script>
 
