@@ -45,6 +45,9 @@ export default Vue.extend({
 
 <style lang="scss">
 .chat {
+  &__items {
+    margin-bottom: 96px;
+  }
   &__footer {
     position: fixed;
     bottom: 0;
