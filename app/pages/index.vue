@@ -15,7 +15,7 @@
       @checkBoxStatus="friends[index].isChecked = $event"
     />
 
-    <v-bottom-navigation v-model="value" class="tab">
+    <v-bottom-navigation v-model="value" grow class="tab color">
       <v-btn value="home">
         <span>Home</span>
 
@@ -123,5 +123,9 @@ export default Vue.extend({
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.color {
+  color: #fc6076;
 }
 </style>
