@@ -14,7 +14,6 @@ export default Vue.extend({})
 
 <style lang="scss" scoped>
 .chat-header {
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1) !important;
-  background: linear-gradient(to right, #aadfeb, #71cfe3);
+  box-shadow: $default-shadow !important;
 }
 </style>
