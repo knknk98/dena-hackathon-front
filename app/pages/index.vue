@@ -14,7 +14,12 @@
       <v-icon>mdi-cog-outline</v-icon>
     </div>
     <v-divider inset />
-    <p class="mb-0 mr-0 ml-4 mt-4 font-weight-bold">友だち</p>
+    <div class="d-flex justify-space-between align-center mb-0 mx-4 mt-4">
+      <p class="font-weight-bold mb-0">友だち</p>
+      <v-btn rounded class="primary" @click="dialog = true"
+        ><v-icon>mdi-plus</v-icon>リクエストを作成</v-btn
+      >
+    </div>
     <!-- 友だち表示するコンポーネント -->
     <friend-item class="mx-4 my-2" />
     <friend-item class="mx-4 my-2" />
@@ -32,6 +37,43 @@
         <v-icon>mdi-chat-processing</v-icon>
       </v-btn>
     </v-bottom-navigation>
+
+    <!-- dialog -->
+    <v-dialog
+      v-model="dialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <!-- header -->
+        <v-toolbar dark color="primary">
+          <v-btn icon dark @click="dialog = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+          <v-toolbar-title>リクエストを作成</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <v-btn dark text @click="dialog = false">作成</v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-list three-line subheader>
+          <v-subheader class="font-weight-bold">友だちを選択</v-subheader>
+          <div class="choice-friend ma-4">
+            <friend-item />
+            <v-checkbox hide-details class="shrink mr-2 mt-0"></v-checkbox>
+          </div>
+          <div class="choice-friend ma-4">
+            <friend-item />
+            <v-checkbox hide-details class="shrink mr-2 mt-0"></v-checkbox>
+          </div>
+          <div class="choice-friend ma-4">
+            <friend-item />
+            <v-checkbox hide-details class="shrink mr-2 mt-0"></v-checkbox>
+          </div>
+        </v-list>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -44,6 +86,10 @@ export default Vue.extend({
   data() {
     return {
       value: 'home',
+      dialog: false,
+      notifications: false,
+      sound: true,
+      widgets: false,
     }
   },
 })
@@ -72,5 +118,11 @@ export default Vue.extend({
 .tab {
   position: fixed;
   bottom: 0;
+}
+
+.choice-friend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>

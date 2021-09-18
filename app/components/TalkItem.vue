@@ -4,11 +4,7 @@
     <!-- テキストも表示するタイプ(普通にトークしてる状態) -->
     <div v-if="isTalking" class="talking ma-4">
       <div class="talking-inner">
-        <img
-          src="../assets/icon_sample.png"
-          alt="ユーザーアイコン"
-          class="talking-inner-icon"
-        />
+        <v-avatar size="36"><img src="../assets/icon_sample.png" /> </v-avatar>
         <div class="ml-4">
           <p class="name ma-0">Shoma</p>
           <p class="message ma-0">そうだよね〜。</p>
@@ -22,11 +18,9 @@
     <div v-else>
       <div class="friend ma-4">
         <div class="friend-inner">
-          <img
-            src="../assets/icon_sample.png"
-            alt="ユーザーアイコン"
-            class="friend-inner-icon"
-          />
+          <v-avatar size="36"
+            ><img src="../assets/icon_sample.png" />
+          </v-avatar>
           <p class="friend-inner-name ma-0 ml-4">Shoma</p>
         </div>
         <v-chip v-if="true" color="info" outlined
@@ -78,8 +72,6 @@ export default Vue.extend({
     display: flex;
     align-items: center;
     &-icon {
-      width: 36px;
-      height: 36px;
       border-radius: 50%;
     }
     &-name {
