@@ -22,6 +22,7 @@
 import Vue from 'vue'
 
 export default Vue.extend({
+  name: 'talk',
   data() {
     return {
       value: 'talk',
