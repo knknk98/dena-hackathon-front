@@ -1,6 +1,8 @@
 <template>
   <div>
-    <talk-item />
+    <app-header class="header" />
+    <talk-item v-for="i in 20" :key="i" />
+
     <v-bottom-navigation v-model="value" class="tab">
       <v-btn value="home" nuxt to="/">
         <span>Home</span>
@@ -29,6 +31,12 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
 .tab {
   position: fixed;
   bottom: 0;

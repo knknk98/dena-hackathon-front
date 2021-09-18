@@ -1,6 +1,5 @@
 <template>
   <div>
-    <app-header />
     <!-- テキストも表示するタイプ(普通にトークしてる状態) -->
     <div v-if="isTalking" class="talking ma-4">
       <div class="talking-inner">

@@ -1,14 +1,12 @@
 <template>
   <div>
-    <app-header />
+    <app-header class="header" />
     <!-- 自分のアイコン、名前表示 -->
     <div class="user ma-4">
       <div class="user-inner">
-        <img
-          src="../assets/icon_sample.png"
-          alt="ユーザーアイコン"
-          class="user-inner-icon"
-        />
+        <v-avatar size="48">
+          <img src="../assets/icon_sample.png" />
+        </v-avatar>
         <p class="user-inner-name ma-0 ml-4">Shoma</p>
       </div>
       <v-icon>mdi-cog-outline</v-icon>
@@ -21,9 +19,7 @@
       >
     </div>
     <!-- 友だち表示するコンポーネント -->
-    <friend-item class="mx-4 my-2" />
-    <friend-item class="mx-4 my-2" />
-    <friend-item class="mx-4 my-2" />
+    <friend-item v-for="i in 20" :key="i" class="ma-4" />
 
     <v-bottom-navigation v-model="value" class="tab">
       <v-btn value="home">
@@ -47,7 +43,7 @@
     >
       <v-card>
         <!-- header -->
-        <v-toolbar dark color="primary">
+        <v-toolbar dark color="primary" class="header">
           <v-btn icon dark @click="dialog = false">
             <v-icon>mdi-close</v-icon>
           </v-btn>
@@ -57,17 +53,10 @@
             <v-btn dark text @click="dialog = false">作成</v-btn>
           </v-toolbar-items>
         </v-toolbar>
+
         <v-list three-line subheader>
           <v-subheader class="font-weight-bold">友だちを選択</v-subheader>
-          <div class="choice-friend ma-4">
-            <friend-item />
-            <v-checkbox hide-details class="shrink mr-2 mt-0"></v-checkbox>
-          </div>
-          <div class="choice-friend ma-4">
-            <friend-item />
-            <v-checkbox hide-details class="shrink mr-2 mt-0"></v-checkbox>
-          </div>
-          <div class="choice-friend ma-4">
+          <div v-for="i in 20" :key="i" class="choice-friend ma-4">
             <friend-item />
             <v-checkbox hide-details class="shrink mr-2 mt-0"></v-checkbox>
           </div>
@@ -96,6 +85,12 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
 .user {
   display: flex;
   align-items: center;
