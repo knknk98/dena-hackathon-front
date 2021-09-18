@@ -28,7 +28,7 @@
         rounded
         append-icon="mdi-send"
         full-width
-        color="#71CFE3"
+        color="#FF7668"
       />
     </div>
   </div>

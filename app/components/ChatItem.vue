@@ -7,9 +7,9 @@
       <v-card class="pa-3">
         <div class="white--text">今暇だったりしない？</div>
       </v-card>
-      <div class="align-self-end mx-2 grey--text">21:08</div>
+      <div class="align-self-end mx-2 grey--text text--lighten-1">21:08</div>
     </div>
-    <div v-else class="d-flex my-4">
+    <div v-else class="d-flex my-5">
       <v-avatar size="36" class="mr-2">
         <img
           src="https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg"
@@ -18,7 +18,7 @@
       <v-card color="#F4F4F4" class="pa-3">
         <div class="chatitem--textcolor">ちょうどめっちゃ暇だったw</div>
       </v-card>
-      <div class="align-self-end mx-2 grey--text">21:08</div>
+      <div class="align-self-end mx-3 grey--text text--lighten-1">21:08</div>
     </div>
   </div>
 </template>
@@ -40,16 +40,16 @@ export default Vue.extend({
 .chatitem {
   &__mine {
     .v-card {
-      background: linear-gradient(to right, #aadfeb, #71cfe3);
+      background: $primary-gradient;
       border-radius: 8px 8px 0px 8px !important;
     }
   }
   .v-card {
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: $default-shadow !important;
     border-radius: 8px 8px 8px 0px;
   }
   &--textcolor {
-    color: #9e9e9e;
+    color: #252525;
   }
 }
 </style>
