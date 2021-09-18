@@ -71,7 +71,7 @@ import Vue from 'vue'
 import AppHeader from '../components/AppHeader.vue'
 import FriendItem from '../components/FriendItem.vue'
 export default Vue.extend({
-  name: 'index',
+  name: 'Index',
   components: { FriendItem, AppHeader },
   data() {
     return {
