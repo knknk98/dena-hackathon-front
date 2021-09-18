@@ -2,3 +2,9 @@
 //
 // The variables you want to modify
 // $font-size-root: 20px;
+
+// グラデーション定義
+$primary-gradient: linear-gradient(-20deg, #fc6076 0%, #ff9a44 100%);
+
+// 影の定義
+$default-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
