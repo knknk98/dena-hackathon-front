@@ -3,7 +3,7 @@
     <app-header class="header" />
     <talk-item v-for="i in 20" :key="i" />
 
-    <v-bottom-navigation v-model="value" class="tab">
+    <v-bottom-navigation v-model="value" grow class="tab color">
       <v-btn value="home" nuxt to="/">
         <span>Home</span>
 
@@ -44,5 +44,9 @@ export default Vue.extend({
 .tab {
   position: fixed;
   bottom: 0;
+}
+
+.color {
+  color: #fc6076;
 }
 </style>

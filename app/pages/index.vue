@@ -21,7 +21,7 @@
     <!-- 友だち表示するコンポーネント -->
     <friend-item v-for="i in 20" :key="i" class="ma-4" />
 
-    <v-bottom-navigation v-model="value" class="tab">
+    <v-bottom-navigation v-model="value" grow class="tab color">
       <v-btn value="home">
         <span>Home</span>
 
@@ -71,7 +71,7 @@ import Vue from 'vue'
 import AppHeader from '../components/AppHeader.vue'
 import FriendItem from '../components/FriendItem.vue'
 export default Vue.extend({
-  name: 'index',
+  name: 'Index',
   components: { FriendItem, AppHeader },
   data() {
     return {
@@ -120,5 +120,9 @@ export default Vue.extend({
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.color {
+  color: #fc6076;
 }
 </style>
