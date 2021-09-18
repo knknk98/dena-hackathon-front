@@ -1,6 +1,10 @@
 <template>
   <div class="friend">
-    <img src="../assets/icon_sample.png" alt="ユーザーアイコン" class="friend-icon">
+    <img
+      src="../assets/icon_sample.png"
+      alt="ユーザーアイコン"
+      class="friend-icon"
+    />
     <p class="friend-name ma-0 ml-4">Shoma</p>
   </div>
 </template>
@@ -8,7 +12,7 @@
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-  
+  name: 'friend-item',
 })
 </script>
 
@@ -23,7 +27,7 @@ export default Vue.extend({
   }
   &-name {
     font-size: 18px;
-    color: #08072F;
+    color: #08072f;
   }
 }
 </style>
