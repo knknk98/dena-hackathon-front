@@ -20,9 +20,12 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import AppHeader from '../components/AppHeader.vue'
+import TalkItem from '../components/TalkItem.vue'
 
 export default Vue.extend({
-  name: 'talk',
+  name: 'Talk',
+  components: { AppHeader, TalkItem },
   data() {
     return {
       value: 'talk',
