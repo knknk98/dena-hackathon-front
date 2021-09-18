@@ -3,17 +3,7 @@
     <chat-header />
     <div class="chat__items mx-4">
       <chat-item is-mine />
-      <chat-item />
-      <chat-item />
-      <chat-item />
-      <chat-item />
-      <chat-item />
-      <chat-item />
-      <chat-item />
-      <chat-item />
-      <chat-item />
-      <chat-item />
-      <chat-item />
+      <chat-item apply />
       <chat-item />
       <chat-item />
       <chat-item />
