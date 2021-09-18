@@ -13,12 +13,25 @@
       </div>
       <v-icon>mdi-cog-outline</v-icon>
     </div>
-    <v-divider inset/>
+    <v-divider inset />
     <p class="mb-0 mr-0 ml-4 mt-4 font-weight-bold">友だち</p>
     <!-- 友だち表示するコンポーネント -->
     <friend-item class="mx-4 my-2" />
     <friend-item class="mx-4 my-2" />
     <friend-item class="mx-4 my-2" />
+
+    <v-bottom-navigation v-model="value" class="tab">
+      <v-btn value="home">
+        <span>Home</span>
+
+        <v-icon>mdi-account-multiple</v-icon>
+      </v-btn>
+      <v-btn value="talk" nuxt to="/talk">
+        <span>Talk</span>
+
+        <v-icon>mdi-chat-processing</v-icon>
+      </v-btn>
+    </v-bottom-navigation>
   </div>
 </template>
 
@@ -28,6 +41,11 @@ import AppHeader from '../components/AppHeader.vue'
 import FriendItem from '../components/FriendItem.vue'
 export default Vue.extend({
   components: { FriendItem, AppHeader },
+  data() {
+    return {
+      value: 'home',
+    }
+  },
 })
 </script>
 
@@ -49,5 +67,10 @@ export default Vue.extend({
       color: #08072f;
     }
   }
+}
+
+.tab {
+  position: fixed;
+  bottom: 0;
 }
 </style>

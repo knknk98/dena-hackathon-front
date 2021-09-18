@@ -1,0 +1,113 @@
+<template>
+  <div>
+    <app-header />
+    <!-- テキストも表示するタイプ(普通にトークしてる状態) -->
+    <div v-if="isTalking" class="talking ma-4">
+      <div class="talking-inner">
+        <img
+          src="../assets/icon_sample.png"
+          alt="ユーザーアイコン"
+          class="talking-inner-icon"
+        />
+        <div class="ml-4">
+          <p class="name ma-0">Shoma</p>
+          <p class="message ma-0">そうだよね〜。</p>
+        </div>
+      </div>
+      <div class="badge">
+        <p class="badge-num ma-0">1</p>
+      </div>
+    </div>
+    <!-- バッジがつくタイプ(リクエスト中 or リクエストが来ている状態) -->
+    <div v-else>
+      <div class="friend ma-4">
+        <div class="friend-inner">
+          <img
+            src="../assets/icon_sample.png"
+            alt="ユーザーアイコン"
+            class="friend-inner-icon"
+          />
+          <p class="friend-inner-name ma-0 ml-4">Shoma</p>
+        </div>
+        <v-chip v-if="true" color="info" outlined
+          >リクエストがきています！</v-chip
+        >
+        <v-chip v-else color="warning" outlined>リクエスト中です！</v-chip>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
+  data() {
+    return {
+      isTalking: true,
+    }
+  },
+})
+</script>
+
+<style lang="scss" scoped>
+.friend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &-inner {
+    display: flex;
+    align-items: center;
+    &-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+    }
+    &-name {
+      font-size: 18px;
+      color: #08072f;
+    }
+  }
+}
+
+.talking {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &-inner {
+    display: flex;
+    align-items: center;
+    &-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+    }
+    &-name {
+      font-size: 18px;
+      color: #08072f;
+    }
+  }
+}
+
+.name {
+  font-size: 18px;
+}
+
+.message {
+  font-size: 12px;
+}
+
+.badge {
+  border-radius: 50%;
+  // 今の段階では色は適当
+  background-color: black;
+  width: 24px;
+  height: 24px;
+  &-num {
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    line-height: 24px;
+  }
+}
+</style>
