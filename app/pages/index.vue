@@ -3,15 +3,16 @@
     <app-header class="header" />
     <div class="d-flex justify-space-between align-center mb-0 mx-4 mt-4">
       <p class="font-weight-bold mb-0 title">最近どうしてる？</p>
-      <v-btn class="button">聞いてみる</v-btn>
+      <v-btn class="button" @click="request()">聞いてみる</v-btn>
     </div>
     <!-- 友だち表示するコンポーネント -->
     <friend-item
-      v-for="friend in friends"
+      v-for="(friend, index) in friends"
       :key="friend.id"
       class="ma-4"
       :is-checked="friend.isChecked"
       @click="friend.isChecked = !friend.isChecked"
+      @checkBoxStatus="friends[index].isChecked = $event"
     />
 
     <v-bottom-navigation v-model="value" class="tab">
@@ -63,6 +64,17 @@ export default Vue.extend({
         },
       ],
     }
+  },
+  methods: {
+    request() {
+      const userIds = []
+
+      for (const friend of this.friends) {
+        if (friend.isChecked) userIds.push(friend.userId)
+      }
+      // eslint-disable-next-line no-console
+      console.log(userIds)
+    },
   },
 })
 </script>

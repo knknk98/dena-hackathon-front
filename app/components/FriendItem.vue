@@ -1,5 +1,5 @@
 <template>
-  <div class="friend" @click="isChecked = !isChecked">
+  <div class="friend" @click="checkBoxStatus">
     <div class="friend-inner">
       <img
         src="../assets/icon_sample.png"
@@ -22,6 +22,15 @@ export default Vue.extend({
     return {
       isChecked: false,
     }
+  },
+  methods: {
+    // emit
+    checkBoxStatus() {
+      this.isChecked = !this.isChecked
+      this.$emit('checkBoxStatus', this.isChecked)
+      // eslint-disable-next-line no-console
+      console.log(this.isChecked)
+    },
   },
 })
 </script>
