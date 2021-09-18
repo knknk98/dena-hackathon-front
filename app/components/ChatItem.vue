@@ -4,8 +4,8 @@
       v-if="isMine === true"
       class="d-flex flex-row-reverse my-4 chatitem__mine"
     >
-      <v-card>
-        <v-card-text class="white--text">今暇だったりしない？</v-card-text>
+      <v-card class="pa-3">
+        <div class="white--text">今暇だったりしない？</div>
       </v-card>
       <div class="align-self-end mx-2 grey--text">21:08</div>
     </div>
@@ -15,8 +15,8 @@
           src="https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg"
         />
       </v-avatar>
-      <v-card color="#F4F4F4">
-        <v-card-text>ちょうどめっちゃ暇だったw</v-card-text>
+      <v-card color="#F4F4F4" class="pa-3">
+        <div class="chatitem--textcolor">ちょうどめっちゃ暇だったw</div>
       </v-card>
       <div class="align-self-end mx-2 grey--text">21:08</div>
     </div>
@@ -41,7 +41,15 @@ export default Vue.extend({
   &__mine {
     .v-card {
       background: linear-gradient(to right, #aadfeb, #71cfe3);
+      border-radius: 8px 8px 0px 8px !important;
     }
+  }
+  .v-card {
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px 8px 8px 0px;
+  }
+  &--textcolor {
+    color: #9e9e9e;
   }
 }
 </style>

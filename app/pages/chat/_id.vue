@@ -11,8 +11,15 @@
       <chat-item />
       <chat-item />
       <chat-item />
+      <chat-item />
+      <chat-item />
+      <chat-item />
+      <chat-item />
+      <chat-item />
+      <chat-item />
+      <chat-item />
     </div>
-    <div class="chat__footer mx-4">
+    <div class="chat__footer">
       <v-textarea
         solo
         rows="1"
@@ -20,6 +27,8 @@
         auto-grow
         rounded
         append-icon="mdi-send"
+        full-width
+        color="#71CFE3"
       />
     </div>
   </div>
@@ -27,8 +36,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import ChatHeader from '../components/ChatHeader.vue'
-import ChatItem from '../components/ChatItem.vue'
+import ChatHeader from '../../components/ChatHeader.vue'
+import ChatItem from '../../components/ChatItem.vue'
 export default Vue.extend({
   components: { ChatHeader, ChatItem },
 })
@@ -36,17 +45,15 @@ export default Vue.extend({
 
 <style lang="scss">
 .chat {
-  display: flex;
-  height: 100vh;
-  flex-direction: column;
-  &__items {
-    flex: 1;
-    overflow-y: scroll;
-  }
   &__footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 0 16px;
     textarea {
       max-height: 100px !important;
       overflow-y: scroll;
+      width: 100%;
     }
   }
 }
