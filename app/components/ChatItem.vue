@@ -86,7 +86,6 @@ export default Vue.extend({
       this.$emit('clickChip', chipName)
     },
     formatDate() {
-      console.log(String(this.chat.date))
       const d = String(this.chat.date).split('T')[1].split(':')
       return `${d[0]}:${d[1]}`
     },

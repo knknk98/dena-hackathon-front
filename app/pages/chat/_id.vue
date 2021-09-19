@@ -42,9 +42,12 @@ export default Vue.extend({
       chats: [],
       roomId: '',
       userId: '',
+      friends: [],
     }
   },
   mounted() {
+    // friendsを取得
+    this.friends = this.$store.state.friend.friends
     // friendIdを取得
     this.friendId = parseInt(
       this.$router.currentRoute.path.split('/').slice(2)[0]
@@ -91,7 +94,7 @@ export default Vue.extend({
         message: response.text,
         isMine: String(response.sender_id) === String(this.userId),
         request: false, // ここも変える必要あり
-        date: response.created_at, // 変える必要あり
+        date: response.created_at,
         iconImage:
           'https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg', // ここも変える必要あり
       }
@@ -117,6 +120,15 @@ export default Vue.extend({
         message: this.inputText,
       })
       this.inputText = ''
+    },
+    getImageByUserId(userId) {
+      // user
+      console.log(this.friends)
+      const friend = this.friends.find(
+        (friend) => String(userId) === String(friend.userId)
+      )
+      console.log(friend)
+      return friend.iconImage
     },
   },
 })
