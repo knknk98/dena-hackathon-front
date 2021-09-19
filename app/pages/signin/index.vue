@@ -29,7 +29,7 @@ export default Vue.extend({
         }
         this.$store.commit('friend/updateUserInfo', user)
         this.$store.commit('friend/updateUserId', user.id)
-        this.$router.push('')
+        this.$router.push('/')
       })
   },
 })

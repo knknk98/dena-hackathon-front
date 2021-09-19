@@ -3,7 +3,7 @@
     <!-- テキストも表示するタイプ(普通にトークしてる状態) -->
     <div v-if="!talk.request" class="talking ma-4" @click="openChatPage">
       <div class="talking-inner">
-        <v-avatar size="36"><img src="../assets/icon_sample.png" /> </v-avatar>
+        <v-avatar size="36"><img :src="talk.iconImage" /> </v-avatar>
         <div class="ml-4">
           <p class="name ma-0">Shoma</p>
           <p class="message ma-0">{{ talk.message }}</p>
@@ -14,9 +14,7 @@
     <div v-else @click="openChatPage">
       <div class="friend ma-4">
         <div class="friend-inner">
-          <v-avatar size="36"
-            ><img src="../assets/icon_sample.png" />
-          </v-avatar>
+          <v-avatar size="36"><img :src="talk.iconImage" /> </v-avatar>
           <p class="friend-inner-name ma-0 ml-4">Shoma</p>
         </div>
         <v-chip v-if="true" color="warning" outlined
@@ -42,6 +40,7 @@ export default Vue.extend({
         message: '',
         date: '',
         request: false,
+        iconImage: '',
       }),
     },
   },
