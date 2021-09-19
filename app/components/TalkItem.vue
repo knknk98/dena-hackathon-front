@@ -1,16 +1,13 @@
 <template>
   <div>
     <!-- テキストも表示するタイプ(普通にトークしてる状態) -->
-    <div v-if="isTalking" class="talking ma-4" @click="openChatPage">
+    <div v-if="!talk.request" class="talking ma-4" @click="openChatPage">
       <div class="talking-inner">
         <v-avatar size="36"><img src="../assets/icon_sample.png" /> </v-avatar>
         <div class="ml-4">
           <p class="name ma-0">Shoma</p>
-          <p class="message ma-0">そうだよね〜。</p>
+          <p class="message ma-0">{{ talk.message }}</p>
         </div>
-      </div>
-      <div class="badge">
-        <p class="badge-num ma-0">1</p>
       </div>
     </div>
     <!-- バッジがつくタイプ(リクエスト中 or リクエストが来ている状態) -->
@@ -22,10 +19,10 @@
           </v-avatar>
           <p class="friend-inner-name ma-0 ml-4">Shoma</p>
         </div>
-        <v-chip v-if="true" color="info" outlined
+        <v-chip v-if="true" color="warning" outlined
           >リクエストがきています！</v-chip
         >
-        <v-chip v-else color="warning" outlined>リクエスト中です！</v-chip>
+        <v-chip v-else color="info" outlined>リクエスト中です！</v-chip>
       </div>
     </div>
   </div>
@@ -36,6 +33,18 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'TalkItem',
+  props: {
+    talk: {
+      type: Object,
+      default: () => ({
+        friendId: '',
+        roomId: '',
+        message: '',
+        date: '',
+        request: false,
+      }),
+    },
+  },
   data() {
     return {
       isTalking: false,

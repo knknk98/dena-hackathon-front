@@ -2,11 +2,11 @@
   <div class="friend" @click="checkBoxStatus">
     <div class="friend-inner">
       <img
-        src="../assets/icon_sample.png"
+        :src="friend.iconImage"
         alt="ユーザーアイコン"
         class="friend-inner-icon"
       />
-      <p class="friend-inner-name ma-0 ml-4">Shoma</p>
+      <p class="friend-inner-name ma-0 ml-4">{{ friend.userName }}</p>
     </div>
     <div :class="['checkbox', isChecked ? 'checked' : '']">
       <v-icon size="16" class="checkbox-icon">mdi-star</v-icon>
@@ -18,6 +18,16 @@
 import Vue from 'vue'
 export default Vue.extend({
   name: 'FriendItem',
+  props: {
+    friend: {
+      type: Object,
+      default: () => ({
+        userId: '',
+        userName: '',
+        iconImage: '',
+      }),
+    },
+  },
   data() {
     return {
       isChecked: false,
@@ -28,8 +38,6 @@ export default Vue.extend({
     checkBoxStatus() {
       this.isChecked = !this.isChecked
       this.$emit('checkBoxStatus', this.isChecked)
-      // eslint-disable-next-line no-console
-      console.log(this.isChecked)
     },
   },
 })

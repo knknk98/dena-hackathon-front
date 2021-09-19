@@ -10,7 +10,7 @@
       v-for="(friend, index) in friends"
       :key="friend.id"
       class="ma-4"
-      :is-checked="friend.isChecked"
+      :friend="friend"
       @click="friend.isChecked = !friend.isChecked"
       @checkBoxStatus="friends[index].isChecked = $event"
     />
@@ -32,38 +32,44 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import axios from 'axios'
 import AppHeader from '../components/AppHeader.vue'
 import FriendItem from '../components/FriendItem.vue'
+
 export default Vue.extend({
   name: 'Index',
   components: { FriendItem, AppHeader },
   data() {
     return {
       value: 'home',
-      friends: [
-        {
-          userId: '1',
-          userName: 'shoma',
-          iconImage:
-            'https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg',
-          isChecked: false,
-        },
-        {
-          userId: '2',
-          userName: 'shoma',
-          iconImage:
-            'https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg',
-          isChecked: false,
-        },
-        {
-          userId: '3',
-          userName: 'shoma',
-          iconImage:
-            'https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg',
-          isChecked: false,
-        },
-      ],
+      friends: [],
+      userId: '',
     }
+  },
+  mounted() {
+    this.userId = this.$store.state.friend.userId
+    console.log(this.userId)
+    if (this.userId === '') {
+      this.$router.push('login')
+    }
+    // friendの取得
+    axios
+      .get(`${this.$config.apiURL}/api/users/${this.userId}/frends`)
+      .then((res) => {
+        console.log(res)
+        for (const friend of res.data.friends) {
+          const user = {
+            userId: friend.id,
+            userName: friend.username,
+            iconImage: friend.icon_url,
+            isChecked: false, // ここは固定値(最初はチェックつかないので)
+          }
+          this.friends.push(user)
+        }
+      })
+    // this.$store.commit('friend/updateFriends', this.friends)
+    const test = this.$store.state.friend.friends
+    console.log(test)
   },
   methods: {
     request() {
@@ -72,8 +78,18 @@ export default Vue.extend({
       for (const friend of this.friends) {
         if (friend.isChecked) userIds.push(friend.userId)
       }
-      // eslint-disable-next-line no-console
-      console.log(userIds)
+
+      const params = JSON.stringify({
+        request_user_id_list: userIds,
+        message: '最近どうしてる？',
+      })
+
+      axios
+        .post(`${this.$config.apiURL}/api/contacts/${this.userId}`, params)
+        .then(() => {
+          console.log('success')
+          this.$router.push('talk')
+        })
     },
   },
 })
