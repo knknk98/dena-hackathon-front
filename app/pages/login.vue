@@ -1,10 +1,14 @@
 <template>
-<div>login</div>
+  <div>
+    <v-btn class="button" nuxt to="/signup/home">
+      <v-icon left> mdi-twitter </v-icon>Twitterでログイン
+    </v-btn>
+  </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({
-})
-</script>
-
+<style lang="scss" scoped>
+.button {
+  background-image: $primary-gradient;
+  color: white;
+}
+</style>
