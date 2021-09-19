@@ -1,7 +1,7 @@
 <template>
   <div>
     <app-header class="header" />
-    <talk-item v-for="talk in talks" :key="talk.friendId" :talk="talk" />
+    <talk-item v-for="talk in talks" :key="talk.index" :talk="talk" />
 
     <v-bottom-navigation v-model="value" grow class="tab color">
       <v-btn value="home" nuxt to="/">
@@ -43,20 +43,33 @@ export default Vue.extend({
       .get(`${this.$config.apiURL}/api/contacts/${this.userId}`)
       .then((res) => {
         console.log(res)
+
+        let list = []
+
+        if (res.data.received_contact_list) {
+          list = res.data.receiced_contact_list
+        }
+
         // received_contact_list
-        for (const contact of res.data.received_contact_list) {
+        for (const [index, contact] of list.entries()) {
           const talk = {
             friendId: contact.sender_id,
             roomId: contact.room_id,
             message: contact.message,
             date: contact.send_at,
             request: true,
-            iconUrl: this.getImageByUserId(contact.sender_id),
+            index,
+            iconUrl:
+              'https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg',
           }
           this.talks.push(talk)
         }
 
         // past_message_list
+        if (res.data.past_message_list === null) {
+          res.data.past_message_list = []
+        }
+
         for (const contact of res.data.past_message_list) {
           const talk = {
             friendId: contact.sender_id,
@@ -64,7 +77,8 @@ export default Vue.extend({
             message: contact.message,
             date: contact.send_at,
             request: false,
-            iconUrl: this.getImageByUserId(contact.sender_id),
+            iconUrl:
+              'https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg',
           }
           this.talks.push(talk)
         }
