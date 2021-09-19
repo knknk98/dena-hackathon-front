@@ -1,6 +1,7 @@
 <template>
   <v-app-bar dense class="header">
-    <v-toolbar-title>App</v-toolbar-title>
+    <v-avatar size="24" class="mr-2"><img src="../assets/icon.png" /></v-avatar>
+    <v-toolbar-title>melt</v-toolbar-title>
     <v-spacer></v-spacer>
     <div @click="toSettingPage">
       <v-avatar size="24"

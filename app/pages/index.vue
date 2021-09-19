@@ -49,9 +49,7 @@ export default Vue.extend({
   mounted() {
     this.userId = this.$store.state.friend.userId
     console.log(this.userId)
-    if (this.userId === '') {
-      this.$router.push('login')
-    }
+
     // friendの取得
     axios
       .get(`${this.$config.apiURL}/api/users/${this.userId}/frends`)
@@ -67,9 +65,6 @@ export default Vue.extend({
           this.friends.push(user)
         }
       })
-    // this.$store.commit('friend/updateFriends', this.friends)
-    const test = this.$store.state.friend.friends
-    console.log(test)
   },
   methods: {
     request() {

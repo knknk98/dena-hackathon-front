@@ -40,6 +40,8 @@ export default Vue.extend({
       socket: '',
       inputText: '',
       chats: [],
+      roomId: '',
+      userId: '',
     }
   },
   mounted() {
@@ -48,15 +50,19 @@ export default Vue.extend({
       this.$router.currentRoute.path.split('/').slice(2)[0]
     )
 
-    // 自分のIDを1と仮定
-    const userId = this.$store.state.friend.userId
+    // roomId を取得
+    this.roomId = this.$store.state.friend.roomId
 
-    this.socket = io(`${this.$config.apiURL}:3000/api/contact`, {
+    // 自分のIDを1と仮定
+    this.userId = this.$store.state.friend.userId
+
+    this.socket = io(`${this.$config.apiURL}:3000`, {
       transports: ['websocket'],
     })
     // TODO: roomIDを渡すようにする
-    this.socket.emit('join', { user_id: this.friendId, room: '1' })
+    this.socket.emit('join', { user_id: this.userId, room: this.roomId })
 
+    console.log(`${this.userId} : ${this.roomId}`)
     /**
      * created_at: "2021-09-19T10:04:27.000Z"
       sender_id: 2
@@ -69,7 +75,7 @@ export default Vue.extend({
         const chat = {
           id: _chat.id,
           message: _chat.text,
-          isMine: _chat.sender_id === userId,
+          isMine: String(_chat.sender_id) === String(this.userId),
           request: false, // ここも変える必要あり
           date: _chat.created_at,
           iconImage:
@@ -83,12 +89,14 @@ export default Vue.extend({
       const chat = {
         id: response.id,
         message: response.text,
-        isMine: response.sender_id === userId,
+        isMine: String(response.sender_id) === String(this.userId),
         request: false, // ここも変える必要あり
-        date: '2021-09-19T10:37:29.000Z', // 変える必要あり
+        date: response.created_at, // 変える必要あり
         iconImage:
           'https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg', // ここも変える必要あり
       }
+      console.log(response)
+      console.log(chat)
       this.chats.push(chat)
     })
   },
@@ -104,7 +112,7 @@ export default Vue.extend({
     },
     sendMessage(value) {
       this.socket.emit('post', {
-        user_id: this.friendId,
+        user_id: this.userId,
         room: '1',
         message: this.inputText,
       })

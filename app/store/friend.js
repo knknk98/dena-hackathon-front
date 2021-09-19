@@ -1,12 +1,13 @@
 export const state = () => ({
   friends: [],
-  userId: '',
+  userId: '1',
   userInfo: {
     id: '',
     userName: '',
     displayName: '',
     iconUrl: '',
   },
+  roomId: '1',
 })
 
 export const mutations = {
@@ -22,6 +23,9 @@ export const mutations = {
     state.userInfo.userName = userInfo.userName
     state.userInfo.displayName = userInfo.displayName
     state.userInfo.iconUrl = userInfo.iconUrl
+  },
+  updateRoomId(state, roomId) {
+    state.roomId = roomId
   },
 }
 
