@@ -62,7 +62,10 @@ export default Vue.extend({
         },
      */
 
-    this.socket = io('http://localhost:5000', { transports: ['websocket'] })
+    this.socket = io(
+      'http://ec2-18-176-53-88.ap-northeast-1.compute.amazonaws.com:3000',
+      { transports: ['websocket'] }
+    )
     // TODO: roomIDを渡すようにする
     this.socket.emit('join', { user_id: this.friendId, room: '1' })
 
@@ -98,17 +101,6 @@ export default Vue.extend({
       }
       this.chats.push(chat)
     })
-
-    // const socket = io('http://localhost:5000', { transports: ['websocket'] })
-
-    // // joinするときの動作
-    // socket.emit('join', { user_id: 1, room: 1 })
-    // // eslint-disable-next-line no-console
-    // console.log('hoge')
-    // socket.on('join-response', (msg) => {
-    //   // eslint-disable-next-line no-console
-    //   console.log(msg + 'nothing?')
-    // })
   },
   methods: {
     clickChip(value) {

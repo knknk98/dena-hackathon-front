@@ -32,8 +32,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import axios from 'axios'
 import AppHeader from '../components/AppHeader.vue'
 import FriendItem from '../components/FriendItem.vue'
+
 export default Vue.extend({
   name: 'Index',
   components: { FriendItem, AppHeader },
@@ -72,8 +74,21 @@ export default Vue.extend({
       for (const friend of this.friends) {
         if (friend.isChecked) userIds.push(friend.userId)
       }
-      // eslint-disable-next-line no-console
-      console.log(userIds)
+
+      const params = JSON.stringify({
+        request_user_id_list: userIds,
+        message: '最近どうしてる？',
+      })
+
+      axios
+        .post(
+          'http://ec2-18-176-53-88.ap-northeast-1.compute.amazonaws.com/api/contact',
+          params
+        )
+        .then(() => {
+          console.log('success')
+          this.$router.push('talk')
+        })
     },
   },
 })
