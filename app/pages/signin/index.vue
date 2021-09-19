@@ -1,5 +1,5 @@
 <template>
-  <div>login成功</div>
+  <div></div>
 </template>
 
 <script lang="ts">

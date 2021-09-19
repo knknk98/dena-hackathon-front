@@ -88,7 +88,6 @@ export default Vue.extend({
     formatDate() {
       console.log(String(this.chat.date))
       const d = String(this.chat.date).split('T')[1].split(':')
-      console.log(d)
       return `${d[0]}:${d[1]}`
     },
   },

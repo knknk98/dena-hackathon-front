@@ -53,6 +53,7 @@ export default Vue.extend({
     openChatPage() {
       const friendId = 1
       this.$router.push({ path: '/chat/' + friendId })
+      this.$store.commit('friend/updateRoomId', this.talk.roomId)
     },
   },
 })
