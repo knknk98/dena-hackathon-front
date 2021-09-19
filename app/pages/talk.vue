@@ -64,6 +64,7 @@ export default Vue.extend({
             message: contact.message,
             date: contact.send_at,
             request: false,
+            iconUrl: this.getImageByUserId(contact.sender_id),
           }
           this.talks.push(talk)
         }
@@ -72,9 +73,8 @@ export default Vue.extend({
   methods: {
     getImageByUserId(userId) {
       // user
-      const a = this.friends.find((friend) => userId === friend.userId)
-      console.log(a)
-      return 'hoge'
+      const friend = this.friends.find((friend) => userId === friend.userId)
+      return friend.iconImage
     },
   },
 })

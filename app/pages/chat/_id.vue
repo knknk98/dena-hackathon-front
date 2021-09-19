@@ -49,18 +49,7 @@ export default Vue.extend({
     )
 
     // 自分のIDを1と仮定
-    const myId = 1
-
-    /**
-     * {
-          message: 'ずっと寝てる',
-          isMine: true,
-          request: false,
-          date: '07:34',
-          iconImage:
-            'https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg',
-        },
-     */
+    const userId = this.$store.state.friend.userId
 
     this.socket = io(`${this.$config.apiURL}:3000/api/contact`, {
       transports: ['websocket'],
@@ -80,7 +69,7 @@ export default Vue.extend({
         const chat = {
           id: _chat.id,
           message: _chat.text,
-          isMine: _chat.sender_id === myId,
+          isMine: _chat.sender_id === userId,
           request: false, // ここも変える必要あり
           date: _chat.created_at,
           iconImage:
@@ -94,7 +83,7 @@ export default Vue.extend({
       const chat = {
         id: response.id,
         message: response.text,
-        isMine: response.sender_id === myId,
+        isMine: response.sender_id === userId,
         request: false, // ここも変える必要あり
         date: '2021-09-19T10:37:29.000Z', // 変える必要あり
         iconImage:
