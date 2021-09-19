@@ -9,9 +9,6 @@
           <p class="message ma-0">{{ talk.message }}</p>
         </div>
       </div>
-      <div class="badge">
-        <p class="badge-num ma-0">1</p>
-      </div>
     </div>
     <!-- バッジがつくタイプ(リクエスト中 or リクエストが来ている状態) -->
     <div v-else @click="openChatPage">

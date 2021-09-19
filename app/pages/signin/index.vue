@@ -13,14 +13,24 @@ export default Vue.extend({
     const oauthToken = this.$route.query.oauth_token
     const oauthVerifier = this.$route.query.oauth_verifier
     const oauthSecret = this.$cookie.get('oauth_secret')
-    axios.post(
-      'http://ec2-13-230-67-131.ap-northeast-1.compute.amazonaws.com/api/users/signin',
-      {
+    axios
+      .post(`${this.$config.apiURL}/api/users/signin`, {
         oauth_token: oauthToken,
         oauth_verifier: oauthVerifier,
         oauth_secret: oauthSecret,
-      }
-    )
+      })
+      .then((res) => {
+        console.log(res)
+        const user = {
+          id: res.data.user.id,
+          userName: res.data.user.username,
+          displayName: res.data.user.display_name,
+          iconUrl: res.data.user.icon_url,
+        }
+        this.$store.commit('friend/updateUserInfo', user)
+        this.$store.commit('friend/updateUserId', user.id)
+        this.$router.push('')
+      })
   },
 })
 </script>

@@ -31,13 +31,16 @@ export default Vue.extend({
     return {
       value: 'talk',
       talks: [],
+      friends: [],
     }
   },
   mounted() {
+    this.userId = this.$store.state.friend.userId
+    this.friends = this.$store.state.friend.friends
+    console.log(this.friends)
+
     axios
-      .get(
-        'http://ec2-18-176-53-88.ap-northeast-1.compute.amazonaws.com/api/contact'
-      )
+      .get(`${this.$config.apiURL}/api/contacts/${this.userId}`)
       .then((res) => {
         console.log(res)
         // received_contact_list
@@ -48,6 +51,7 @@ export default Vue.extend({
             message: contact.message,
             date: contact.send_at,
             request: true,
+            iconUrl: this.getImageByUserId(contact.sender_id),
           }
           this.talks.push(talk)
         }
@@ -64,6 +68,14 @@ export default Vue.extend({
           this.talks.push(talk)
         }
       })
+  },
+  methods: {
+    getImageByUserId(userId) {
+      // user
+      const a = this.friends.find((friend) => userId === friend.userId)
+      console.log(a)
+      return 'hoge'
+    },
   },
 })
 </script>

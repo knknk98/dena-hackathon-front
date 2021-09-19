@@ -4,7 +4,7 @@
     <div class="chat__items mx-4">
       <chat-item
         v-for="chat in chats"
-        :key="chat.date"
+        :key="chat.id"
         :chat="chat"
         @clickChip="clickChip"
       />
@@ -20,9 +20,9 @@
         append-icon="mdi-send"
         full-width
         color="#FF7668"
+        @click:append="sendMessage"
       />
     </div>
-    <v-btn @click="test()">test</v-btn>
   </div>
 </template>
 
@@ -62,10 +62,9 @@ export default Vue.extend({
         },
      */
 
-    this.socket = io(
-      'http://ec2-18-176-53-88.ap-northeast-1.compute.amazonaws.com:3000',
-      { transports: ['websocket'] }
-    )
+    this.socket = io(`${this.$config.apiURL}:3000/api/contact`, {
+      transports: ['websocket'],
+    })
     // TODO: roomIDを渡すようにする
     this.socket.emit('join', { user_id: this.friendId, room: '1' })
 
@@ -79,6 +78,7 @@ export default Vue.extend({
       console.log(msg)
       for (const _chat of msg.chats) {
         const chat = {
+          id: _chat.id,
           message: _chat.text,
           isMine: _chat.sender_id === myId,
           request: false, // ここも変える必要あり
@@ -92,6 +92,7 @@ export default Vue.extend({
     })
     this.socket.on('post-response', (response) => {
       const chat = {
+        id: response.id,
         message: response.text,
         isMine: response.sender_id === myId,
         request: false, // ここも変える必要あり
@@ -112,12 +113,13 @@ export default Vue.extend({
       this.$store.commit('friend/update', 'update')
       console.log(this.$store.state.friend.test)
     },
-    test() {
+    sendMessage(value) {
       this.socket.emit('post', {
         user_id: this.friendId,
         room: '1',
-        message: 'あいうえお',
+        message: this.inputText,
       })
+      this.inputText = ''
     },
   },
 })

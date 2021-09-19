@@ -71,4 +71,13 @@ export default {
   server: {
     port: 5000,
   },
+
+  publicRuntimeConfig: {
+    baseURL:
+      'http://ec2-54-238-6-99.ap-northeast-1.compute.amazonaws.com/' ||
+      'http://locahost:5000',
+    apiURL:
+      'http://ec2-54-238-6-99.ap-northeast-1.compute.amazonaws.com' ||
+      'http://localhost:3000',
+  },
 }

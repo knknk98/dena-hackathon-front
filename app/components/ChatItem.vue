@@ -9,7 +9,7 @@
         <div class="white--text">{{ chat.message }}</div>
       </v-card>
       <div class="align-self-end mx-2 grey--text text--lighten-1">
-        {{ chat.date }}
+        {{ formatDate() }}
       </div>
     </div>
 
@@ -24,7 +24,7 @@
         <div class="chatitem--textcolor">{{ chat.message }}</div>
       </v-card>
       <div class="align-self-end mx-3 grey--text text--lighten-1">
-        {{ chat.date }}
+        {{ formatDate() }}
       </div>
     </div>
 
@@ -84,6 +84,12 @@ export default Vue.extend({
       // propsを変更するのは非推奨なため、clickedというパラメータをつくって、そこで変更
       this.clicked = true
       this.$emit('clickChip', chipName)
+    },
+    formatDate() {
+      console.log(String(this.chat.date))
+      const d = String(this.chat.date).split('T')[1].split(':')
+      console.log(d)
+      return `${d[0]}:${d[1]}`
     },
   },
 })
