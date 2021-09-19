@@ -1,0 +1,14 @@
+version: "3"
+services:
+  vue:
+    container_name: dena-hackathon-front
+    tty: true
+    build:
+      context: ./
+      dockerfile: ./app/Dockerfile
+    working_dir: /home
+    volumes:
+      - ./app:/home:cached
+    environment:
+      - HOST=0.0.0.0
+    command: sh -c "yarn install && yarn run generate"
