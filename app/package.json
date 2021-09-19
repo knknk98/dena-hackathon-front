@@ -16,6 +16,7 @@
     "nuxt": "^2.15.7",
     "socket.io": "^4.2.0",
     "socket.io-client": "^4.2.0",
+    "vue-cookie": "^1.1.4",
     "vuetify": "^2.5.5"
   },
   "devDependencies": {
