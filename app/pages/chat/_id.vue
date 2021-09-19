@@ -4,7 +4,7 @@
     <div class="chat__items mx-4">
       <chat-item
         v-for="chat in chats"
-        :key="chat.message"
+        :key="chat.date"
         :chat="chat"
         @clickChip="clickChip"
       />
@@ -22,6 +22,7 @@
         color="#FF7668"
       />
     </div>
+    <v-btn @click="test()">test</v-btn>
   </div>
 </template>
 
@@ -38,40 +39,7 @@ export default Vue.extend({
       friendId: '',
       socket: '',
       inputText: '',
-      chats: [
-        {
-          message: '最近どうしてる？',
-          isMine: false,
-          request: true,
-          date: '07:28',
-          iconImage:
-            'https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg',
-        },
-        {
-          message: '家',
-          isMine: true,
-          request: false,
-          date: '07:29',
-          iconImage:
-            'https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg',
-        },
-        {
-          message: 'なにもしてないの？',
-          isMine: false,
-          request: false,
-          date: '07:32',
-          iconImage:
-            'https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg',
-        },
-        {
-          message: 'ずっと寝てる',
-          isMine: true,
-          request: false,
-          date: '07:34',
-          iconImage:
-            'https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg',
-        },
-      ],
+      chats: [],
     }
   },
   mounted() {
@@ -80,11 +48,55 @@ export default Vue.extend({
       this.$router.currentRoute.path.split('/').slice(2)[0]
     )
 
+    // 自分のIDを1と仮定
+    const myId = 1
+
+    /**
+     * {
+          message: 'ずっと寝てる',
+          isMine: true,
+          request: false,
+          date: '07:34',
+          iconImage:
+            'https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg',
+        },
+     */
+
     this.socket = io('http://localhost:5000', { transports: ['websocket'] })
-    this.socket.emit('join', { user_id: '2', room: '1' })
+    // TODO: roomIDを渡すようにする
+    this.socket.emit('join', { user_id: this.friendId, room: '1' })
+
+    /**
+     * created_at: "2021-09-19T10:04:27.000Z"
+      sender_id: 2
+        text: "バイト"
+     */
+
     this.socket.on('join-response', (msg) => {
-      // eslint-disable-next-line no-console
       console.log(msg)
+      for (const _chat of msg.chats) {
+        const chat = {
+          message: _chat.text,
+          isMine: _chat.sender_id === myId,
+          request: false, // ここも変える必要あり
+          date: _chat.created_at,
+          iconImage:
+            'https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg', // ここも変える必要あり
+        }
+
+        this.chats.push(chat)
+      }
+    })
+    this.socket.on('post-response', (response) => {
+      const chat = {
+        message: response.text,
+        isMine: response.sender_id === myId,
+        request: false, // ここも変える必要あり
+        date: '2021-09-19T10:37:29.000Z', // 変える必要あり
+        iconImage:
+          'https://pbs.twimg.com/profile_images/1384754241097535489/-8-WiVO5_400x400.jpg', // ここも変える必要あり
+      }
+      this.chats.push(chat)
     })
 
     // const socket = io('http://localhost:5000', { transports: ['websocket'] })
@@ -99,13 +111,6 @@ export default Vue.extend({
     // })
   },
   methods: {
-    send(message) {
-      this.socket.emit('post', { user_id: '2', room: '1', message })
-      this.socket.on('post-join', (response) => {
-        // eslint-disable-next-line no-console
-        console.log(response)
-      })
-    },
     clickChip(value) {
       // valueがクリックされたチップのテキスト
       // ここからsend呼び出す
@@ -114,6 +119,13 @@ export default Vue.extend({
       console.log(this.$store.state.friend.test)
       this.$store.commit('friend/update', 'update')
       console.log(this.$store.state.friend.test)
+    },
+    test() {
+      this.socket.emit('post', {
+        user_id: this.friendId,
+        room: '1',
+        message: 'あいうえお',
+      })
     },
   },
 })
